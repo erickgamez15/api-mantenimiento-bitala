@@ -57,6 +57,6 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa [id_empresa=" + idEmpresa + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + "direccion=" + direccion +"]";
+        return "empresa [id_empresa=" + idEmpresa + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + "direccion=" + direccion +"]";
     }
 }

@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface IEmpresaRepository extends JpaRepository<Empresa, Long> {
-    List<Empresa> findByName(@Param("nombre") String nombre);
+    List<Empresa> findByNombre(@Param("nombre") String nombre);
 }
