@@ -15,6 +15,19 @@ public class Empresa {
     private String telefono;
     private String direccion;
 
+    public Empresa(){
+
+    }
+
+    //Construtor para inicializar variables
+    public Empresa(Long idEmpresa, String nombre, String correo, String telefono, String direccion){
+        this.idEmpresa = idEmpresa;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+
     public Long getIdEmpresa() {
         return idEmpresa;
     }
