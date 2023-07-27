@@ -16,9 +16,8 @@ public class ChecksMantenimiento {
     @Column(name = "id_verificacion")
     private Long idVerificacion;
 
-    @ManyToOne
-    @JoinColumn(name = "id_check")
-    private Checks idCheck;
+    @Column(name = "id_check")
+    private Long idCheck;
 
     private String checked = "false";
 
@@ -26,7 +25,7 @@ public class ChecksMantenimiento {
         
     }
 
-    public ChecksMantenimiento(Long idCheckMan, Long idVerificacion, Checks idCheck, String checked) {
+    public ChecksMantenimiento(Long idCheckMan, Long idVerificacion, Long idCheck, String checked) {
         this.idCheckMan = idCheckMan;
         this.idVerificacion = idVerificacion;
         this.idCheck = idCheck;
@@ -49,11 +48,11 @@ public class ChecksMantenimiento {
         this.idVerificacion = idVerificacion;
     }
 
-    public Checks getIdCheck() {
+    public Long getIdCheck() {
         return idCheck;
     }
 
-    public void setIdCheck(Checks idCheck) {
+    public void setIdCheck(Long idCheck) {
         this.idCheck = idCheck;
     }
 

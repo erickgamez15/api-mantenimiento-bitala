@@ -3,7 +3,9 @@ package com.bitala.apiprueba.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.bitala.apiprueba.models.ChecksMantenimiento;
+
 @Repository
-public interface IChecksMantenimientoRepository extends JpaRepository <IChecksMantenimientoRepository, Long> {
+public interface IChecksMantenimientoRepository extends JpaRepository <ChecksMantenimiento, Long> {
     
 }
