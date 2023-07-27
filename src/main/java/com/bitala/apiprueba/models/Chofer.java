@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Chofer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
     @Column(name = "id_chofer")
     private Long idChofer;
     
