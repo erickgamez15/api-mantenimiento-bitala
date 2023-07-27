@@ -21,6 +21,7 @@ public class ChecksController {
     //Anotación para la inyección de dependencias
     @Autowired
     private IChecksRepository checkRepository;
+    Checks check;
 
     @GetMapping
     public Iterable<Checks> allChecks() {
@@ -38,8 +39,15 @@ public class ChecksController {
     }
 
     @PutMapping("/{id}")
-    public Checks updateChecks(@PathVariable Long id, @RequestBody Checks checks){
-        return checkRepository.save(checks);
+    public Checks updateChecks(@PathVariable Long id, @RequestBody Checks checkData){
+        check = checkRepository.findById(id).orElse(null);
+        if (check != null) {
+            check.setCategoria(checkData.getCategoria());
+            check.setDescripcion(checkData.getDescripcion());
+            return checkRepository.save(check);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")
