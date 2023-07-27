@@ -14,6 +14,17 @@ public class Checks {
     private Long categoria;
     private String descripcion;
 
+    public Checks(){
+
+    }
+
+    //Constructor para inicializar variables
+    public Checks(Long idCheck, Long categoria, String descripcion){
+        this.idCheck = idCheck;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+    }
+
     public Long getIdCheck(){
         return idCheck;
     }

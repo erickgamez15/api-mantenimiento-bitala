@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/empresa")
 public class EmpresaController {
     @Autowired
     private IEmpresaRepository empresaRepository;
 
-    @GetMapping("/empresas")
+    @GetMapping
     public List<Empresa> allEmpresas(){
         return empresaRepository.findAll();
     }
 
-    @GetMapping("/empresa/{nombre}")
-    public List<Empresa> findByName(@PathVariable("nombre") String nombre) {
-        return empresaRepository.findByNombre(nombre);
+    @GetMapping("/{id}")
+    public Empresa findById(@PathVariable("id") Long id) {
+        return empresaRepository.findById(id).orElse(null);
     }
 
-    @PostMapping("/empresa")
-    public Empresa creatEmpresa(@RequestBody Empresa empresa){
+    @PostMapping
+    public Empresa createEmpresa(@RequestBody Empresa empresa){
         return empresaRepository.save(empresa);
     }
     
-    @PutMapping("/empresa/{id}")
+    @PutMapping("/{id}")
     public Empresa updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresa) {
         return empresaRepository.save(empresa);
     }
 
-    @DeleteMapping("/person/{id}")
+    @DeleteMapping("/{id}")
 	public void deleteEmpresa(@PathVariable("id") Long id) {
 		empresaRepository.deleteById(id);
 	}
