@@ -21,6 +21,8 @@ public class ChecksController {
     //Anotación para la inyección de dependencias
     @Autowired
     private IChecksRepository checkRepository;
+
+    //Objeto Checks
     Checks check;
 
     @GetMapping

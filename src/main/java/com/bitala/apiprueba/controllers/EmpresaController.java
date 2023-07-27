@@ -17,8 +17,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/empresa")
 public class EmpresaController {
+
+    //Anotación para inyección de dependencias
     @Autowired
     private IEmpresaRepository empresaRepository;
+
+    //Objeto Empressa
+    Empresa empresa;
 
     @GetMapping
     public List<Empresa> allEmpresas(){
@@ -36,8 +41,17 @@ public class EmpresaController {
     }
     
     @PutMapping("/{id}")
-    public Empresa updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresa) {
-        return empresaRepository.save(empresa);
+    public Empresa updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaData) {
+        empresa = empresaRepository.findById(id).orElse(null);
+        if(empresa != null){
+            empresa.setNombre(empresaData.getNombre());
+            empresa.setCorreo(empresaData.getCorreo());
+            empresa.setTelefono(empresaData.getTelefono());
+            empresa.setDireccion(empresaData.getDireccion());
+            return empresaRepository.save(empresa);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")
