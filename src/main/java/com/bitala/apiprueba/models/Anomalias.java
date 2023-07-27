@@ -16,21 +16,12 @@ public class Anomalias {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAnomalia;
 
-    @ManyToOne
-    @JoinColumn(name = "id_unidad")
     private Long idUnidad;
-
-    @ManyToOne
-    @JoinColumn(name = "id_chofer")
     private Long idChofer;
-
-    @ManyToOne
-    @JoinColumn(name = "id_mantenimiento")
     private Long idMantenimiento;
-
     private String anomalia;
     private String descripcion;
-
+    
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
