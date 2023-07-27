@@ -50,7 +50,7 @@ public class Checks {
     }
 
     @Override
-    public String toString(){
-        return "checks [id_check" + idCheck + ", categoria" + categoria + ", descripcion" + descripcion + "]";
+    public String toString() {
+        return "Checks [idCheck=" + idCheck + ", categoria=" + categoria + ", descripcion=" + descripcion + "]";
     }
 }

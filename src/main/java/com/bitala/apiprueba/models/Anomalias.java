@@ -109,6 +109,6 @@ public class Anomalias {
 
     @Override
     public String toString() {
-        return "anomalias [id_anomalia" + idAnomalia + ", id_unidad" + idUnidad + ", id_chofer" + idChofer + ", id_mantenimiento" + idMantenimiento + ", anomalia" + anomalia + "descripcion" + descripcion + "fecha" + fecha + "estatus" + estatus + "]";
+        return "Anomalias [idAnomalia=" + idAnomalia + ", idUnidad=" + idUnidad + ", idChofer=" + idChofer + ", idMantenimiento=" + idMantenimiento + ", anomalia=" + anomalia + ", descripcion=" + descripcion + ", fecha=" + fecha + ", estatus=" + estatus + "]";
     }
 }
