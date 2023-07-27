@@ -9,18 +9,19 @@ import jakarta.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class TiposVehiculos {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) <--en la base de datos no es incrementable. Descommentar cuando se modifuque eso.
     @Column(name = "id_vehiculo")
     private Long idVehiculo;
 
-    private String tipo_vehiculo;
+    @Column(name = "tipo_vehiculo")
+    private String tipoVehiculo;
 
     public TiposVehiculos() {
     }
 
-    public TiposVehiculos(Long idVehiculo, String tipo_vehiculo) {
+    public TiposVehiculos(Long idVehiculo, String tipoVehiculo) {
         this.idVehiculo = idVehiculo;
-        this.tipo_vehiculo = tipo_vehiculo;
+        this.tipoVehiculo = tipoVehiculo;
     }
 
     public Long getIdVehiculo() {
@@ -32,15 +33,15 @@ public class TiposVehiculos {
     }
 
     public String getTipo_vehiculo() {
-        return tipo_vehiculo;
+        return tipoVehiculo;
     }
 
     public void setTipo_vehiculo(String tipo_vehiculo) {
-        this.tipo_vehiculo = tipo_vehiculo;
+        this.tipoVehiculo = tipo_vehiculo;
     }
 
     @Override
     public String toString() {
-        return "TiposVehiculos [idVehiculo=" + idVehiculo + ", tipo_vehiculo=" + tipo_vehiculo + "]";
+        return "TiposVehiculos [idVehiculo=" + idVehiculo + ", tipoVehiculo=" + tipoVehiculo + "]";
     }
 }
