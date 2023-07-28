@@ -1,5 +1,20 @@
 package com.bitala.apiprueba.models;
 
+import java.util.Date;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "control_vehicular")
+@EntityListeners(AuditingEntityListener.class)
 public class ControlVehicular {
     /*
     `id_control_vehicular` int(11) NOT NULL,
@@ -10,5 +25,102 @@ public class ControlVehicular {
 	`doc_s_semestre` varchar(128),
 	`checked_pago_ss` varchar(15) DEFAULT 'false'
     */
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
+    @Column(name = "id_control_vehicular")
+    private Long idControlVehicular;
+
+    @Column(name = "fecha_p_semestre")
+    private Date fechaPSemestre;
+
+    @Column(name = "doc_p_semestre")
+    private Date docPSemestre;
+
+    @Column(name = "checked_pago_ps")
+    private Date checkedPagoPs;
+
+    @Column(name = "fecha_s_semestre")
+    private Date fechaSSemestre;
+
+    @Column(name = "doc_s_semestre")
+    private Date docSSemestre;
+
+    @Column(name = "checked_pago_ss")
+    private Date checkedPagoSs;
+
+    public ControlVehicular() {
+
+    }
+
+    public ControlVehicular(Long idControlVehicular, Date fechaPSemestre, Date docPSemestre, Date checkedPagoPs, Date fechaSSemestre, Date docSSemestre, Date checkedPagoSs) {
+        this.idControlVehicular = idControlVehicular;
+        this.fechaPSemestre = fechaPSemestre;
+        this.docPSemestre = docPSemestre;
+        this.checkedPagoPs = checkedPagoPs;
+        this.fechaSSemestre = fechaSSemestre;
+        this.docSSemestre = docSSemestre;
+        this.checkedPagoSs = checkedPagoSs;
+    }
+
+    public Long getIdControlVehicular() {
+        return idControlVehicular;
+    }
+
+    public void setIdControlVehicular(Long idControlVehicular) {
+        this.idControlVehicular = idControlVehicular;
+    }
+
+    public Date getFechaPSemestre() {
+        return fechaPSemestre;
+    }
+
+    public void setFechaPSemestre(Date fechaPSemestre) {
+        this.fechaPSemestre = fechaPSemestre;
+    }
+
+    public Date getDocPSemestre() {
+        return docPSemestre;
+    }
+
+    public void setDocPSemestre(Date docPSemestre) {
+        this.docPSemestre = docPSemestre;
+    }
+
+    public Date getCheckedPagoPs() {
+        return checkedPagoPs;
+    }
+
+    public void setCheckedPagoPs(Date checkedPagoPs) {
+        this.checkedPagoPs = checkedPagoPs;
+    }
+
+    public Date getFechaSSemestre() {
+        return fechaSSemestre;
+    }
+
+    public void setFechaSSemestre(Date fechaSSemestre) {
+        this.fechaSSemestre = fechaSSemestre;
+    }
+
+    public Date getDocSSemestre() {
+        return docSSemestre;
+    }
+
+    public void setDocSSemestre(Date docSSemestre) {
+        this.docSSemestre = docSSemestre;
+    }
+
+    public Date getCheckedPagoSs() {
+        return checkedPagoSs;
+    }
+
+    public void setCheckedPagoSs(Date checkedPagoSs) {
+        this.checkedPagoSs = checkedPagoSs;
+    }
+
+    @Override
+    public String toString() {
+        return "ControlVehicular [idControlVehicular=" + idControlVehicular + ", fechaPSemestre=" + fechaPSemestre+ ", docPSemestre=" + docPSemestre + ", checkedPagoPs=" + checkedPagoPs + ", fechaSSemestre=" + fechaSSemestre + ", docSSemestre=" + docSSemestre + ", checkedPagoSs=" + checkedPagoSs + "]";
+    }
 }
