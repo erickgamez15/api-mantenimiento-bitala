@@ -3,6 +3,7 @@ package com.bitala.apiprueba.models;
 import java.util.Date;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "control_vehicular")
@@ -31,6 +34,8 @@ public class ControlVehicular {
     @Column(name = "id_control_vehicular")
     private Long idControlVehicular;
 
+    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_p_semestre")
     private Date fechaPSemestre;
 
@@ -40,6 +45,8 @@ public class ControlVehicular {
     @Column(name = "checked_pago_ps")
     private String checkedPagoPs;
 
+    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_s_semestre")
     private Date fechaSSemestre;
 
