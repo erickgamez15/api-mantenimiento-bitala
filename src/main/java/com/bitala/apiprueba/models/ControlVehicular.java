@@ -35,25 +35,25 @@ public class ControlVehicular {
     private Date fechaPSemestre;
 
     @Column(name = "doc_p_semestre")
-    private Date docPSemestre;
+    private String docPSemestre;
 
     @Column(name = "checked_pago_ps")
-    private Date checkedPagoPs;
+    private String checkedPagoPs;
 
     @Column(name = "fecha_s_semestre")
     private Date fechaSSemestre;
 
     @Column(name = "doc_s_semestre")
-    private Date docSSemestre;
+    private String docSSemestre;
 
     @Column(name = "checked_pago_ss")
-    private Date checkedPagoSs;
+    private String checkedPagoSs;
 
     public ControlVehicular() {
 
     }
 
-    public ControlVehicular(Long idControlVehicular, Date fechaPSemestre, Date docPSemestre, Date checkedPagoPs, Date fechaSSemestre, Date docSSemestre, Date checkedPagoSs) {
+    public ControlVehicular(Long idControlVehicular, Date fechaPSemestre, String docPSemestre, String checkedPagoPs, Date fechaSSemestre, String docSSemestre, String checkedPagoSs) {
         this.idControlVehicular = idControlVehicular;
         this.fechaPSemestre = fechaPSemestre;
         this.docPSemestre = docPSemestre;
@@ -79,19 +79,19 @@ public class ControlVehicular {
         this.fechaPSemestre = fechaPSemestre;
     }
 
-    public Date getDocPSemestre() {
+    public String getDocPSemestre() {
         return docPSemestre;
     }
 
-    public void setDocPSemestre(Date docPSemestre) {
+    public void setDocPSemestre(String docPSemestre) {
         this.docPSemestre = docPSemestre;
     }
 
-    public Date getCheckedPagoPs() {
+    public String getCheckedPagoPs() {
         return checkedPagoPs;
     }
 
-    public void setCheckedPagoPs(Date checkedPagoPs) {
+    public void setCheckedPagoPs(String checkedPagoPs) {
         this.checkedPagoPs = checkedPagoPs;
     }
 
@@ -103,19 +103,19 @@ public class ControlVehicular {
         this.fechaSSemestre = fechaSSemestre;
     }
 
-    public Date getDocSSemestre() {
+    public String getDocSSemestre() {
         return docSSemestre;
     }
 
-    public void setDocSSemestre(Date docSSemestre) {
+    public void setDocSSemestre(String docSSemestre) {
         this.docSSemestre = docSSemestre;
     }
 
-    public Date getCheckedPagoSs() {
+    public String getCheckedPagoSs() {
         return checkedPagoSs;
     }
 
-    public void setCheckedPagoSs(Date checkedPagoSs) {
+    public void setCheckedPagoSs(String checkedPagoSs) {
         this.checkedPagoSs = checkedPagoSs;
     }
 
