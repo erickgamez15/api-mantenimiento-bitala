@@ -1,9 +1,8 @@
 package com.bitala.apiprueba.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.*;
 
@@ -27,13 +26,9 @@ public class Verificacion {
     @Column(name = "id_mantenimiento")
     private Long idMantenimiento;
 
-    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_inicial")
     private Date fechaInicial;
 
-    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_checkeado")
     private Date fechaCheckeado;
 

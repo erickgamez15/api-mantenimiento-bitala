@@ -1,6 +1,6 @@
 package com.bitala.apiprueba.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +25,7 @@ public class Anomalias {
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
+
     private String estatus = "pendiente";
 
     public Anomalias(){
