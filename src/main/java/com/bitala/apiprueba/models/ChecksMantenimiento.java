@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "checks_mantenimiento")
 @EntityListeners(AuditingEntityListener.class)
 public class ChecksMantenimiento {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
     @Column(name = "id_check_man")

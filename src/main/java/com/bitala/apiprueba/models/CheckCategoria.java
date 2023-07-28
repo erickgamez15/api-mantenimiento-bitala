@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "check_categoria")
 @EntityListeners(AuditingEntityListener.class)
 public class CheckCategoria {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")

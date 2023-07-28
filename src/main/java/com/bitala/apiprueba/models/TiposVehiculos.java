@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "tipos_vehiculos")
 @EntityListeners(AuditingEntityListener.class)
 public class TiposVehiculos {
+    
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY) <--en la base de datos no es incrementable. Descommentar cuando se modifuque eso.
     @Column(name = "id_vehiculo")

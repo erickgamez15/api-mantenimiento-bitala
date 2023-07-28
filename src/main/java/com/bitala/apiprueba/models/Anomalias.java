@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 @Table(name = "anomalias")
 @EntityListeners(AuditingEntityListener.class)
 public class Anomalias {
+    
     @Id
     @Column(name = "id_anomalia")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

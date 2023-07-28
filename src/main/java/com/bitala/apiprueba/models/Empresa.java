@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "empresa")
 @EntityListeners(AuditingEntityListener.class)
 public class Empresa {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
     @Column(name = "id_empresa")

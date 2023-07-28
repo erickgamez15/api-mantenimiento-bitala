@@ -1,6 +1,6 @@
 package com.bitala.apiprueba.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,15 +11,6 @@ import jakarta.persistence.*;
 @Table(name = "control_vehicular")
 @EntityListeners(AuditingEntityListener.class)
 public class ControlVehicular {
-    /*
-    `id_control_vehicular` int(11) NOT NULL,
-	`fecha_p_semestre`date DEFAULT NULL,
-	`doc_p_semestre` varchar(128),
-	`checked_pago_ps` varchar(15) DEFAULT 'false',
-	`fecha_s_semestre`date DEFAULT NULL,
-	`doc_s_semestre` varchar(128),
-	`checked_pago_ss` varchar(15) DEFAULT 'false'
-    */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
