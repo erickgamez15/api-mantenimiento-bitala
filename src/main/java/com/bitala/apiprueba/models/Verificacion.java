@@ -1,5 +1,15 @@
 package com.bitala.apiprueba.models;
 
+import java.util.Date;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "verificacion")
+@EntityListeners(AuditingEntityListener.class)
 public class Verificacion {
     /* 
     `id_verificacion` int(11) NOT NULL,
@@ -8,4 +18,81 @@ public class Verificacion {
 	`fecha_checkeado` date DEFAULT NULL,
 	`estatus` varchar(45) DEFAULT 'pendiente'
     */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_verificacion")
+    private Long idVerificacion;
+
+    @Column(name = "id_mantenimiento")
+    private Long idMantenimiento;
+
+    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_inicial")
+    private Date fechaInicial;
+
+    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_checkeado")
+    private Date fechaCheckeado;
+
+    private String estatus;
+
+    public Verificacion() {
+
+    }
+
+    public Verificacion(Long idVerificacion, Long idMantenimiento, Date fechaInicial, Date fechaCheckeado,String estatus) {
+        this.idVerificacion = idVerificacion;
+        this.idMantenimiento = idMantenimiento;
+        this.fechaInicial = fechaInicial;
+        this.fechaCheckeado = fechaCheckeado;
+        this.estatus = estatus;
+    }
+
+    public Long getIdVerificacion() {
+        return idVerificacion;
+    }
+
+    public void setIdVerificacion(Long idVerificacion) {
+        this.idVerificacion = idVerificacion;
+    }
+
+    public Long getIdMantenimiento() {
+        return idMantenimiento;
+    }
+
+    public void setIdMantenimiento(Long idMantenimiento) {
+        this.idMantenimiento = idMantenimiento;
+    }
+
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
+    public Date getFechaCheckeado() {
+        return fechaCheckeado;
+    }
+
+    public void setFechaCheckeado(Date fechaCheckeado) {
+        this.fechaCheckeado = fechaCheckeado;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Verificacion [idVerificacion=" + idVerificacion + ", idMantenimiento=" + idMantenimiento + ", fechaInicial=" + fechaInicial + ", fechaCheckeado=" + fechaCheckeado + ", estatus=" + estatus + "]";
+    }
 }
