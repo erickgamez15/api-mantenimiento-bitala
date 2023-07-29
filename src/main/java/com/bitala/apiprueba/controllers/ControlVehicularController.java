@@ -8,36 +8,54 @@ import com.bitala.apiprueba.repository.IControlVehicularRepository;
 
 import java.util.List;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * CONTROLLER - CONTROLVEHICULAR
+ * 
+ * version 1.0
+ */
+
+//Indica que la clase es un controlador
 @RestController
+//Ruta para accder a ControlVehicular
 @RequestMapping("/api/control-vehicular")
 public class ControlVehicularController {
     
     //Anotación para inyeccion de dependencias
     @Autowired
-    private IControlVehicularRepository controlRepository;
+    private IControlVehicularRepository controlRepository; 
 
-    //Objeto ControlVehicular
-    ControlVehicular controlVehicular;
+    //Constructor para inyección de dependencias
+    public ControlVehicularController(IControlVehicularRepository controlRepository) {
+        this.controlRepository = controlRepository;
+    }
 
+    //Retorna una lista de todos los elementos de ControlVehicular
     @GetMapping
     public List<ControlVehicular> allControl(){
         return controlRepository.findAll();
     }
 
+    //Busca un ControlVehicular por id
     @GetMapping("/{id}")
     public ControlVehicular findById(@PathVariable("id") Long id){
-        return controlRepository.findById(id).orElse(null);
+        if (controlRepository.existsById(id)) return controlRepository.findById(id).orElse(null);
+        else return null;
     }
 
+    //Agrega un nuevo ControlVehicular
     @PostMapping
     public ControlVehicular createControlVehicular(@RequestBody ControlVehicular controlVehicular){
         return controlRepository.save(controlVehicular);
     }
 
+    //Modifica un ControlVehicular por id
     @PutMapping("/{id}")
     public ControlVehicular updateControlVehicular(@PathVariable Long id, @RequestBody ControlVehicular cVehicularData){
-        controlVehicular = controlRepository.findById(id).orElse(null);
-        if (controlVehicular != null) {
+        ControlVehicular controlVehicular = new ControlVehicular();
+
+        if (controlRepository.existsById(id)) {
             controlVehicular.setFechaPSemestre(cVehicularData.getFechaPSemestre());
             controlVehicular.setDocPSemestre(cVehicularData.getDocPSemestre());
             controlVehicular.setCheckedPagoPs(cVehicularData.getCheckedPagoPs());
@@ -45,13 +63,12 @@ public class ControlVehicularController {
             controlVehicular.setDocSSemestre(cVehicularData.getDocSSemestre());
             controlVehicular.setCheckedPagoSs(cVehicularData.getCheckedPagoSs());
             return controlRepository.save(controlVehicular);
-        } else {
-            return null;
-        }
+        } else return null;
     }
 
+    //Elimina un ControlVehicular por id
     @DeleteMapping("/{id}")
     public void deleteControlVehicular(@PathVariable("id") Long id){
-        controlRepository.deleteById(id);
+        if (controlRepository.existsById(id)) controlRepository.deleteById(id);   
     }
 }

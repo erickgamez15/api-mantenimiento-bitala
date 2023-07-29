@@ -8,7 +8,17 @@ import com.bitala.apiprueba.repository.IChecksMantenimientoRepository;
 
 import java.util.List;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * CONTROLLER - CHECKSMANTENIMIENTO
+ * 
+ * version 1.0
+ */
+
+//Indica que la clase es un controlador
 @RestController
+//Ruta para acceder a CheckMantenimiento
 @RequestMapping("/api/check-mantenimiento")
 public class ChecksMantenimientoController {
     
@@ -16,39 +26,46 @@ public class ChecksMantenimientoController {
     @Autowired
     private IChecksMantenimientoRepository checksMantenimientoRepository;
 
-    //Objeto ChecksMantenimiento
-    ChecksMantenimiento checksMantenimiento;
+    //Constructor para inyección de dependencias
+    public ChecksMantenimientoController(IChecksMantenimientoRepository checksMantenimientoRepository) {
+        this.checksMantenimientoRepository = checksMantenimientoRepository;
+    }
 
+    //Retorna una lista de todos los elementos de ChecksMantenimiento
     @GetMapping
     public List<ChecksMantenimiento> allChecksMan(){
         return checksMantenimientoRepository.findAll();
     }
 
+    //Busca un CheckMantenimiento por id
     @GetMapping("/{id}")
     public ChecksMantenimiento findById(@PathVariable("id") Long id){
-        return checksMantenimientoRepository.findById(id).orElse(null);
+        if(checksMantenimientoRepository.existsById(id)) return checksMantenimientoRepository.findById(id).orElse(null);
+        else return null;
     }
 
+    //Agrega un nuevo CheckMantenimiento
     @PostMapping
     public ChecksMantenimiento createChecksMantenimiento(@RequestBody ChecksMantenimiento checkMan){
         return checksMantenimientoRepository.save(checkMan);
     }
 
+    //Modifica un ChecMantenimiento por id
     @PutMapping("/{id}")
     public ChecksMantenimiento updateChecksMantenimiento(@PathVariable Long id, @RequestBody ChecksMantenimiento checkManData){
-        checksMantenimiento = checksMantenimientoRepository.findById(id).orElse(checkManData);
-        if (checksMantenimiento != null) {
+        ChecksMantenimiento checksMantenimiento = new ChecksMantenimiento();
+
+        if(checksMantenimientoRepository.existsById(id)) {
             checksMantenimiento.setIdVerificacion(checkManData.getIdVerificacion());
             checksMantenimiento.setIdCheck(checkManData.getIdCheck());
             checksMantenimiento.setChecked(checkManData.getChecked());
             return checksMantenimientoRepository.save(checksMantenimiento);
-        } else {
-            return null;
-        }
+        } else return null;
     }
 
+    //Elimina un CheckMantenimiento por id
     @DeleteMapping("/{id}")
 	public void deleteCheksMantenimiento(@PathVariable("id") Long id) {
-		checksMantenimientoRepository.deleteById(id);
+        if(checksMantenimientoRepository.existsById(id)) checksMantenimientoRepository.deleteById(id);
 	}
 }

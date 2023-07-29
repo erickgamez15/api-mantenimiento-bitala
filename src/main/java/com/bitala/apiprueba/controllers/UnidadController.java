@@ -8,7 +8,17 @@ import com.bitala.apiprueba.repository.IUnidadRepository;
 
 import java.util.List;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * CONTROLLER - UNIDAD
+ * 
+ * version 1.0
+ */
+
+//Indica que la clase es un controlador
 @RestController
+//Ruta para acceder a Unidad
 @RequestMapping("/api/unidad")
 public class UnidadController {
     
@@ -16,8 +26,10 @@ public class UnidadController {
     @Autowired
     private IUnidadRepository unidadRepository;
 
-    //Objeto Unidad
-    Unidad unidad;
+    //Constructor para inyección de dependencias
+    public UnidadController(IUnidadRepository unidadRepository) {
+        this.unidadRepository = unidadRepository;
+    }
 
     @GetMapping
     public List<Unidad> allUnidades(){
@@ -26,7 +38,8 @@ public class UnidadController {
 
     @GetMapping("/{id}")
     public Unidad findById(@PathVariable("id") Long id){
-        return unidadRepository.findById(id).orElse(null);
+        if(unidadRepository.existsById(id)) return unidadRepository.findById(id).orElse(null);
+        else return null;
     }
 
     @PostMapping
@@ -36,8 +49,9 @@ public class UnidadController {
 
     @PutMapping("/{id}")
     public Unidad updateUnidad(@PathVariable Long id, @RequestBody Unidad unidadData){
-        unidad = unidadRepository.findById(id).orElse(null);
-        if (unidad != null) {
+        Unidad unidad = new Unidad();
+
+        if (unidadRepository.existsById(id)) {
             unidad.setIdEmpresa(unidadData.getIdEmpresa());
             unidad.setIdVehiculo(unidadData.getIdVehiculo());
             unidad.setIdControlVehicular(unidadData.getIdControlVehicular());
@@ -51,13 +65,11 @@ public class UnidadController {
             unidad.setEstatus(unidadData.getEstatus());
             unidad.setFotoUnidad(unidad.getFotoUnidad());
             return unidadRepository.save(unidad);
-        } else {
-            return null;
-        }
+        } else return null;
     }
 
     @DeleteMapping("/{id}")
     public void deleteUnidad(@PathVariable("id") Long id){
-        unidadRepository.deleteById(id);
+        if(unidadRepository.existsById(id)) unidadRepository.deleteById(id);
     }
 }
