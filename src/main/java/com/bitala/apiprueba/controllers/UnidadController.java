@@ -1,12 +1,18 @@
 package com.bitala.apiprueba.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.bitala.apiprueba.models.Unidad;
 import com.bitala.apiprueba.repository.IUnidadRepository;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * API MANTENIMIENTOS - BITALA
@@ -26,50 +32,72 @@ public class UnidadController {
     @Autowired
     private IUnidadRepository unidadRepository;
 
+    //Objeto Optional<Unidad>
+    Optional<Unidad> unidadOptional;
+
     //Constructor para inyección de dependencias
     public UnidadController(IUnidadRepository unidadRepository) {
         this.unidadRepository = unidadRepository;
     }
 
+    //Retorna una lista de todos los elementos de Unidad
     @GetMapping
     public List<Unidad> allUnidades(){
         return unidadRepository.findAll();
     }
 
+    //Busca una Unidad por id
     @GetMapping("/{id}")
-    public Unidad findById(@PathVariable("id") Long id){
-        if(unidadRepository.existsById(id)) return unidadRepository.findById(id).orElse(null);
-        else return null;
+    public ResponseEntity<Unidad> findById(@PathVariable("id") Long id){
+        unidadOptional = unidadRepository.findById(id);
+        return unidadOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    //Agrega una nueva Unidad
     @PostMapping
-    public Unidad createUnidad(@RequestBody Unidad unidad){
-        return unidadRepository.save(unidad);
+    public ResponseEntity<Unidad> createUnidad(@RequestBody Unidad unidad){
+        try {
+            Unidad nuevaUnidad = unidadRepository.save(unidad);
+            return ResponseEntity.created(URI.create("/api/unidad/" + nuevaUnidad.getIdUnidad())).body(nuevaUnidad);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+    //Modifica una Unidad por id
     @PutMapping("/{id}")
-    public Unidad updateUnidad(@PathVariable Long id, @RequestBody Unidad unidadData){
-        Unidad unidad = new Unidad();
-
-        if (unidadRepository.existsById(id)) {
-            unidad.setIdEmpresa(unidadData.getIdEmpresa());
-            unidad.setIdVehiculo(unidadData.getIdVehiculo());
-            unidad.setIdControlVehicular(unidadData.getIdControlVehicular());
-            unidad.setClave(unidadData.getClave());
-            unidad.setMarca(unidadData.getMarca());
-            unidad.setModelo(unidadData.getModelo());
-            unidad.setAnio(unidadData.getAnio());
-            unidad.setMotor(unidadData.getMotor());
-            unidad.setVin(unidadData.getVin());
-            unidad.setPlacas(unidadData.getPlacas());
-            unidad.setEstatus(unidadData.getEstatus());
-            unidad.setFotoUnidad(unidad.getFotoUnidad());
-            return unidadRepository.save(unidad);
-        } else return null;
+    public ResponseEntity<Unidad> updateUnidad(@PathVariable Long id, @RequestBody Unidad unidadData){
+        try {
+            unidadOptional = unidadRepository.findById(id);
+            if (unidadOptional.isPresent()) {
+                Unidad unidadExistente = unidadOptional.get();
+                BeanUtils.copyProperties(unidadData, unidadExistente, "id");
+                Unidad unidadActualizada = unidadRepository.save(unidadExistente);
+                return ResponseEntity.ok(unidadActualizada);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+    //Elimina una Unidad por id
     @DeleteMapping("/{id}")
-    public void deleteUnidad(@PathVariable("id") Long id){
-        if(unidadRepository.existsById(id)) unidadRepository.deleteById(id);
+    public ResponseEntity<Unidad> deleteUnidad(@PathVariable("id") Long id){
+        try {
+            if(unidadRepository.existsById(id)) {
+                unidadRepository.deleteById(id);
+                return ResponseEntity.noContent().build();
+            } else return ResponseEntity.notFound().build();
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    // Manejo de excepciones genéricas para cualquier otra excepción no capturada
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error en el servidor.");
     }
 }

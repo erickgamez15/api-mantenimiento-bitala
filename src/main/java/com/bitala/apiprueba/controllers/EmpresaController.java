@@ -1,12 +1,18 @@
 package com.bitala.apiprueba.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.bitala.apiprueba.models.Empresa;
 import com.bitala.apiprueba.repository.IEmpresaRepository;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * API MANTENIMIENTOS - BITALA
@@ -26,6 +32,8 @@ public class EmpresaController {
     @Autowired
     private IEmpresaRepository empresaRepository; 
 
+    Optional<Empresa> empresaOptional;
+
     //Constructor para inyeccion de dependencias
     public EmpresaController(IEmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
@@ -39,34 +47,56 @@ public class EmpresaController {
 
     //Busca una Empresa por id
     @GetMapping("/{id}")
-    public Empresa findById(@PathVariable("id") Long id) {
-        if (empresaRepository.existsById(id)) return empresaRepository.findById(id).orElse(null);
-        else return null;
+    public ResponseEntity<Empresa> findById(@PathVariable("id") Long id) {
+        empresaOptional = empresaRepository.findById(id);
+        return empresaOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     //Agrega una nueva Empresa
     @PostMapping
-    public Empresa createEmpresa(@RequestBody Empresa empresa){
-        return empresaRepository.save(empresa);
+    public ResponseEntity<Empresa> createEmpresa(@RequestBody Empresa empresa){
+        try {
+            Empresa nuevEmpresa = empresaRepository.save(empresa);
+            return ResponseEntity.created(URI.create("/api/aunidad/" + nuevEmpresa.getIdEmpresa())).body(nuevEmpresa);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
     
     //Modifica una Empresa por id
     @PutMapping("/{id}")
-    public Empresa updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaData) {
-        Empresa empresa = new Empresa();
-
-        if(empresaRepository.existsById(id)){
-            empresa.setNombre(empresaData.getNombre());
-            empresa.setCorreo(empresaData.getCorreo());
-            empresa.setTelefono(empresaData.getTelefono());
-            empresa.setDireccion(empresaData.getDireccion());
-            return empresaRepository.save(empresa);
-        } else return null;
+    public ResponseEntity<Empresa> updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaData) {
+        try {
+            empresaOptional = empresaRepository.findById(id);
+            if(empresaOptional.isPresent()){
+                Empresa empresaExistente = empresaOptional.get();
+                BeanUtils.copyProperties(empresaData, empresaExistente, "idEmpresa");
+                Empresa empresaActualizada = empresaRepository.save(empresaExistente);
+                return ResponseEntity.ok(empresaActualizada);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     //Elimina una Empresa por id
     @DeleteMapping("/{id}")
-	public void deleteEmpresa(@PathVariable("id") Long id) {
-        if (empresaRepository.existsById(id)) empresaRepository.deleteById(id);
+	public ResponseEntity<Empresa> deleteEmpresa(@PathVariable("id") Long id) {
+        try {
+            if(empresaRepository.existsById(id)) {
+                empresaRepository.deleteById(id);
+                return ResponseEntity.noContent().build();
+            } else return ResponseEntity.notFound().build();
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 	}
+
+    // Manejo de excepciones genéricas para cualquier otra excepción no capturada
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error en el servidor.");
+    }
 }
