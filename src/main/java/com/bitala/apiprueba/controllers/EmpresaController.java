@@ -1,9 +1,10 @@
 package com.bitala.apiprueba.controllers;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.bitala.apiprueba.models.Empresa;
 import com.bitala.apiprueba.repository.IEmpresaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class EmpresaController {
     @Autowired
     private IEmpresaRepository empresaRepository;
 
-    //Objeto Empressa
+    //Objeto Empresa
     Empresa empresa;
 
     @GetMapping

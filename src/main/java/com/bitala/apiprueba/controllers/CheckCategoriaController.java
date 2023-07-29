@@ -1,12 +1,12 @@
 package com.bitala.apiprueba.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bitala.apiprueba.models.CheckCategoria;
 import com.bitala.apiprueba.repository.ICheckCategoriaRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/check-categoria")
@@ -16,7 +16,7 @@ public class CheckCategoriaController {
     @Autowired
     private ICheckCategoriaRepository checkCategoriaRepository;
 
-    //Objeto Empressa
+    //Objeto CheckCategoria
     CheckCategoria checkCategoria;
 
     @GetMapping

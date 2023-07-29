@@ -1,12 +1,12 @@
 package com.bitala.apiprueba.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bitala.apiprueba.models.Anomalias;
 import com.bitala.apiprueba.repository.IAnomaliasRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/anomalia")
@@ -40,6 +40,7 @@ public class AnomaliasController {
         if (anomalia != null) {
             anomalia.setIdUnidad(anomaliaData.getIdUnidad());
             anomalia.setIdChofer(anomaliaData.getIdChofer());
+            anomalia.setIdMantenimiento(anomaliaData.getIdMantenimiento());
             anomalia.setAnomalia(anomaliaData.getAnomalia());
             anomalia.setDescripcion(anomaliaData.getDescripcion());
             anomalia.setFecha(anomaliaData.getFecha());

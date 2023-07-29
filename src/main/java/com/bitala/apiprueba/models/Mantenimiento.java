@@ -1,10 +1,10 @@
 package com.bitala.apiprueba.models;
 
-import java.sql.Date;
+import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "mantenimiento")
@@ -32,6 +32,7 @@ public class Mantenimiento {
 
     }
 
+    //Constructor para inicializar variables
     public Mantenimiento(Long idMantenimento, Long idUnidad, Date fechaSolicitada, Date fechaEntrega, String estatus, String observacion) {
         this.idMantenimento = idMantenimento;
         this.idUnidad = idUnidad;

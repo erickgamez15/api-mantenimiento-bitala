@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bitala.apiprueba.models.Chofer;
 
 @Repository
-public interface IChoferRepository extends JpaRepository<Chofer, Long> {
+public interface IChoferRepository extends JpaRepository <Chofer, Long> {
     
 }

@@ -1,12 +1,12 @@
 package com.bitala.apiprueba.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bitala.apiprueba.models.ChecksMantenimiento;
 import com.bitala.apiprueba.repository.IChecksMantenimientoRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/check-mantenimiento")
@@ -16,7 +16,7 @@ public class ChecksMantenimientoController {
     @Autowired
     private IChecksMantenimientoRepository checksMantenimientoRepository;
 
-    //Objeto Empressa
+    //Objeto ChecksMantenimiento
     ChecksMantenimiento checksMantenimiento;
 
     @GetMapping

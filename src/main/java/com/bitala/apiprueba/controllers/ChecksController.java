@@ -1,13 +1,12 @@
 package com.bitala.apiprueba.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.bitala.apiprueba.repository.IChecksRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bitala.apiprueba.models.Checks;
+import com.bitala.apiprueba.repository.IChecksRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/check")

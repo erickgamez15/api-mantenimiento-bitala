@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bitala.apiprueba.models.Verificacion;
 
 @Repository
-public interface IVerificacionRepository extends JpaRepository<Verificacion, Long> {
+public interface IVerificacionRepository extends JpaRepository <Verificacion, Long> {
     
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bitala.apiprueba.models.CheckCategoria;
 
 @Repository
-public interface ICheckCategoriaRepository extends JpaRepository<CheckCategoria, Long> {
+public interface ICheckCategoriaRepository extends JpaRepository <CheckCategoria, Long> {
     
 }

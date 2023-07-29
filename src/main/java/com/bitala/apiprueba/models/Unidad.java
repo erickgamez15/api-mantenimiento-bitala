@@ -1,8 +1,8 @@
 package com.bitala.apiprueba.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.*;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "unidad")
@@ -39,6 +39,7 @@ public class Unidad {
 
     }
 
+    //Constructor para inicializar variables
     public Unidad(Long idUnidad, Long idEmpresa, Long idVehiculo, Long idControlVehicular, String clave, String marca, String modelo, String anio, String motor, String vin, String placas, String estatus, String fotoUnidad) {
         this.idUnidad = idUnidad;
         this.idEmpresa = idEmpresa;

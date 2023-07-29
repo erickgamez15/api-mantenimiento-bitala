@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bitala.apiprueba.models.Mantenimiento;
 
 @Repository
-public interface IMantenimientoRepository extends JpaRepository<Mantenimiento, Long> {
+public interface IMantenimientoRepository extends JpaRepository <Mantenimiento, Long> {
     
 }

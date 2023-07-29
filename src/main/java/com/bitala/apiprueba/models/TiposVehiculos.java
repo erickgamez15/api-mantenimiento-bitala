@@ -1,8 +1,8 @@
 package com.bitala.apiprueba.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.*;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "tipos_vehiculos")
@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class TiposVehiculos {
     
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY) <--en la base de datos no es incrementable. Descommentar cuando se modifuque eso.
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) <-- en la base de datos no es incrementable. Descomentar cuando se modifique eso.
     @Column(name = "id_vehiculo")
     private Long idVehiculo;
 
@@ -18,8 +18,10 @@ public class TiposVehiculos {
     private String tipoVehiculo;
 
     public TiposVehiculos() {
+
     }
 
+    //Constructor para inicializar variables
     public TiposVehiculos(Long idVehiculo, String tipoVehiculo) {
         this.idVehiculo = idVehiculo;
         this.tipoVehiculo = tipoVehiculo;

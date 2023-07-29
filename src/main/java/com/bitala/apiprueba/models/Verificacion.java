@@ -1,10 +1,10 @@
 package com.bitala.apiprueba.models;
 
-import java.sql.Date;
+import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "verificacion")
@@ -31,6 +31,7 @@ public class Verificacion {
 
     }
 
+    //Constructor para inicializar variables
     public Verificacion(Long idVerificacion, Long idMantenimiento, Date fechaInicial, Date fechaCheckeado,String estatus) {
         this.idVerificacion = idVerificacion;
         this.idMantenimiento = idMantenimiento;

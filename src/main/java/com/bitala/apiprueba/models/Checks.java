@@ -13,6 +13,7 @@ public class Checks {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
     @Column(name = "id_check")
     private Long idCheck;
+    
     private Long categoria;
     private String descripcion;
 

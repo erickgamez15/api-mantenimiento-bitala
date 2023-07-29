@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bitala.apiprueba.models.Unidad;
 
 @Repository
-public interface IUnidadRepository extends JpaRepository<Unidad, Long> {
+public interface IUnidadRepository extends JpaRepository <Unidad, Long> {
     
 }

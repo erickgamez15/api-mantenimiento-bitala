@@ -1,8 +1,8 @@
 package com.bitala.apiprueba.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.*;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "fotos_anomalia")
@@ -20,8 +20,10 @@ public class FotosAnomalia {
     private String foto;
 
     public FotosAnomalia() {
+
     }
 
+    //Constructor para inicializar variables
     public FotosAnomalia(Long idFotoAnomalia, Long idAnomalia, String foto) {
         this.idFotoAnomalia = idFotoAnomalia;
         this.idAnomalia = idAnomalia;

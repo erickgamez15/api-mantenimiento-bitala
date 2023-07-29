@@ -1,6 +1,7 @@
 package com.bitala.apiprueba.models;
 
 import jakarta.persistence.*;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -12,6 +13,7 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
     @Column(name = "id_empresa")
     private Long idEmpresa;
+
     private String nombre;
     private String correo;
     private String telefono;

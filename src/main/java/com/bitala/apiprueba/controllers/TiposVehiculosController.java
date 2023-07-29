@@ -1,12 +1,12 @@
 package com.bitala.apiprueba.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bitala.apiprueba.models.TiposVehiculos;
 import com.bitala.apiprueba.repository.ITiposVehiculosRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/tipo-vehiculo")

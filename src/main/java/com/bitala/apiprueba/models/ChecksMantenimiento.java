@@ -1,8 +1,8 @@
 package com.bitala.apiprueba.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.*;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "checks_mantenimiento")
@@ -26,6 +26,7 @@ public class ChecksMantenimiento {
         
     }
 
+    //Constructor para inicializar variables
     public ChecksMantenimiento(Long idCheckMan, Long idVerificacion, Long idCheck, String checked) {
         this.idCheckMan = idCheckMan;
         this.idVerificacion = idVerificacion;
