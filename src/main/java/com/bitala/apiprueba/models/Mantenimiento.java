@@ -6,13 +6,36 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Date;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - MANTENIMIENTO
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "mantenimiento")
 @EntityListeners(AuditingEntityListener.class)
 public class Mantenimiento {
 
+    /* 
+    CREATE TABLE `mantenimiento` (
+		`id_mantenimiento` int(11) NOT NULL,
+		`id_unidad` int(11) NOT NULL,
+		`fecha_solicitada` datetime DEFAULT NULL,
+		`fecha_entrega` datetime DEFAULT NULL,
+		`estatus` varchar(45) DEFAULT NULL,
+		`observacion` text DEFAULT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
+
+    //Indica que es la PK de la tabla
     @Id
+    //Para que sea autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_mantenimiento")
     private Long idMantenimento;
 
@@ -42,6 +65,7 @@ public class Mantenimiento {
         this.observacion = observacion;
     }
 
+    //Metodos Get y Set
     public Long getIdMantenimento() {
         return idMantenimento;
     }
@@ -90,6 +114,7 @@ public class Mantenimiento {
         this.observacion = observacion;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "Mantenimiento [idMantenimento=" + idMantenimento + ", idUnidad=" + idUnidad + ", fechaSolicitada=" + fechaSolicitada + ", fechaEntrega=" + fechaEntrega + ", estatus=" + estatus + ", observacion=" + observacion + "]";

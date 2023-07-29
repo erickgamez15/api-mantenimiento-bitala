@@ -4,13 +4,31 @@ import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - TIPOSVEHICULOS
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "tipos_vehiculos")
 @EntityListeners(AuditingEntityListener.class)
 public class TiposVehiculos {
+
+    /* 
+    CREATE TABLE `tipos_vehiculos` (
+		`id_vehiculo` int(11) NOT NULL,
+		`tipo_vehiculo` varchar(128) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
     
+    //Indica que es la PK de la tabla
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY) <-- en la base de datos no es incrementable. Descomentar cuando se modifique eso.
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_vehiculo")
     private Long idVehiculo;
 
@@ -27,6 +45,7 @@ public class TiposVehiculos {
         this.tipoVehiculo = tipoVehiculo;
     }
 
+    //Metodos Get y Set
     public Long getIdVehiculo() {
         return idVehiculo;
     }
@@ -43,6 +62,7 @@ public class TiposVehiculos {
         this.tipoVehiculo = tipo_vehiculo;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "TiposVehiculos [idVehiculo=" + idVehiculo + ", tipoVehiculo=" + tipoVehiculo + "]";

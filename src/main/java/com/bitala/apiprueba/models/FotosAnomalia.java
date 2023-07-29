@@ -4,13 +4,33 @@ import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - FOTOSANOMALIA
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "fotos_anomalia")
 @EntityListeners(AuditingEntityListener.class)
 public class FotosAnomalia {
+
+    /* 
+    CREATE TABLE `fotos_anomalia` (
+		`id_foto_anomalia` int(11) NOT NULL,
+		`id_anomalia` int(11) NOT NULL,
+		`foto` varchar(45) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
     
+    //Indica que es la PK de la tabla
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
+    //Para que sea autoincrementable
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_foto_anomalia")
     private Long idFotoAnomalia;
 
@@ -30,6 +50,7 @@ public class FotosAnomalia {
         this.foto = foto;
     }
 
+    //Metodos Get y Set
     public Long getIdFotoAnomalia() {
         return idFotoAnomalia;
     }
@@ -54,6 +75,7 @@ public class FotosAnomalia {
         this.foto = foto;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "FotosAnomalia [idFotoAnomalia=" + idFotoAnomalia + ", idAnomalia=" + idAnomalia + ", foto=" + foto + "]";

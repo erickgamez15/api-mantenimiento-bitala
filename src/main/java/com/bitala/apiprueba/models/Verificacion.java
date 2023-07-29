@@ -6,13 +6,35 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Date;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - VERIFICACION
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "verificacion")
 @EntityListeners(AuditingEntityListener.class)
 public class Verificacion {
 
+    /* 
+    CREATE TABLE `verificacion` (
+		`id_verificacion` int(11) NOT NULL,
+		`id_mantenimiento` int(11) NOT NULL,
+		`fecha_inicial` date NOT NULL,
+		`fecha_checkeado` date DEFAULT NULL,
+		`estatus` varchar(45) DEFAULT 'pendiente'
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
+
+    //Indica que es la PK de la tabla
     @Id
+    //Para que sea autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_verificacion")
     private Long idVerificacion;
 
@@ -40,6 +62,7 @@ public class Verificacion {
         this.estatus = estatus;
     }
 
+    //Metodos Get y Set
     public Long getIdVerificacion() {
         return idVerificacion;
     }
@@ -80,6 +103,7 @@ public class Verificacion {
         this.estatus = estatus;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "Verificacion [idVerificacion=" + idVerificacion + ", idMantenimiento=" + idMantenimiento + ", fechaInicial=" + fechaInicial + ", fechaCheckeado=" + fechaCheckeado + ", estatus=" + estatus + "]";

@@ -4,13 +4,43 @@ import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - UNIDAD
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "unidad")
 @EntityListeners(AuditingEntityListener.class)
 public class Unidad {
 
+    /* 
+    CREATE TABLE `unidad` (
+		`id_unidad` int(11) NOT NULL,
+		`id_empresa` int(11)NOT NULL,
+		`id_vehiculo` int(11) NOT NULL,
+		`id_control_vehicular` int(11) NOT NULL,
+		`clave` varchar(16) DEFAULT 'S/S',
+		`marca` varchar(128) NOT NULL,
+		`modelo` varchar(128) NOT NULL,
+		`anio` varchar(16) NOT NULL,
+		`motor` varchar(32) NOT NULL,
+		`vin` varchar(128) DEFAULT 'S/V',
+		`placas` varchar(32) DEFAULT 'S/P',
+		`estatus` varchar(45) DEFAULT 'correcto',
+		`foto_unidad` varchar(45) DEFAULT 'unidad_default.png'
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
+
+    //Indica que es la PK de la tabla
     @Id
+    //Para que sea autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_unidad")
     private Long idUnidad;
 
@@ -56,6 +86,7 @@ public class Unidad {
         this.fotoUnidad = fotoUnidad;
     }
 
+    //Metodos Get y Set
     public Long getIdUnidad() {
         return idUnidad;
     }
@@ -160,6 +191,7 @@ public class Unidad {
         this.fotoUnidad = fotoUnidad;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "Unidad [idUnidad=" + idUnidad + ", idEmpresa=" + idEmpresa + ", idVehiculo=" + idVehiculo + ", idControlVehicular=" + idControlVehicular + ", clave=" + clave + ", marca=" + marca + ", modelo=" + modelo + ", anio=" + anio + ", motor=" + motor + ", vin=" + vin + ", placas=" + placas + ", estatus=" + estatus + ", fotoUnidad=" + fotoUnidad + "]";

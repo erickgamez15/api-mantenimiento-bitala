@@ -7,13 +7,37 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - CONTROLVEHICULAR
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "control_vehicular")
 @EntityListeners(AuditingEntityListener.class)
 public class ControlVehicular {
 
+    /* 
+    CREATE TABLE `control_vehicular` (
+		`id_control_vehicular` int(11) NOT NULL,
+		`fecha_p_semestre`date DEFAULT NULL,
+		`doc_p_semestre` varchar(128),
+		`checked_pago_ps` varchar(15) DEFAULT 'false',
+		`fecha_s_semestre`date DEFAULT NULL,
+		`doc_s_semestre` varchar(128),
+		`checked_pago_ss` varchar(15) DEFAULT 'false'
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
+
+    //Indica que es la PK de la tabla
     @Id
+    //Para que sea autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_control_vehicular")
     private Long idControlVehicular;
 
@@ -54,6 +78,7 @@ public class ControlVehicular {
         this.checkedPagoSs = checkedPagoSs;
     }
 
+    //Metodos Get y Set
     public Long getIdControlVehicular() {
         return idControlVehicular;
     }
@@ -110,6 +135,7 @@ public class ControlVehicular {
         this.checkedPagoSs = checkedPagoSs;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "ControlVehicular [idControlVehicular=" + idControlVehicular + ", fechaPSemestre=" + fechaPSemestre+ ", docPSemestre=" + docPSemestre + ", checkedPagoPs=" + checkedPagoPs + ", fechaSSemestre=" + fechaSSemestre + ", docSSemestre=" + docSSemestre + ", checkedPagoSs=" + checkedPagoSs + "]";

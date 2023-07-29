@@ -4,13 +4,38 @@ import jakarta.persistence.*;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - CHOFER
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "chofer")
 @EntityListeners(AuditingEntityListener.class)
 public class Chofer {
+
+    /* 
+    CREATE TABLE `chofer` (
+	    `id_chofer` int(11) NOT NULL,
+		`nombre` varchar(128) NOT NULL,
+		`apellidos` varchar(128) NOT NULL,
+		`correo` varchar(128) NOT NULL,
+		`telefono` varchar(16) DEFAULT NULL,
+		`password` varchar(64) NOT NULL,
+		`no_lista` varchar(45) DEFAULT 'S/N',
+		`foto_chofer` varchar(45) DEFAULT 'user_default.png'
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
     
+    //Indica que es la PK de la tabla
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que sea autoincrementable
+    //Para que sea autoincrementable
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
     @Column(name = "id_chofer")
     private Long idChofer;
     
@@ -42,6 +67,7 @@ public class Chofer {
         this.fotoChofer = fotoChofer;
     }
 
+    //Metodos Get y Set
     public Long getIdChofer() {
         return idChofer;
     }
@@ -106,6 +132,7 @@ public class Chofer {
         this.fotoChofer = fotoChofer;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "Chofer [idChofer=" + idChofer + ", nombre=" + nombre + ", apellidos=" + apellidos + ", correo=" + correo + ", telefono=" + telefono + ", password=" + password + ", noLista=" + noLista + ", fotoChofer=" + fotoChofer + "]";

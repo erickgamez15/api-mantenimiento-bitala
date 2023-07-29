@@ -7,14 +7,39 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * MODEL - ANOMALIAS
+ * 
+ * version 1.0
+ */
+
 @Entity
+//name sigue la nomenclatura de SQL (nombre de la tabla)
 @Table(name = "anomalias")
 @EntityListeners(AuditingEntityListener.class)
 public class Anomalias {
-    
+
+    /* 
+    CREATE TABLE `anomalias` (
+		`id_anomalia` int(11) NOT NULL,
+		`id_unidad` int(11) NOT NULL,
+		`id_chofer` int(11) NOT NULL,
+		`id_mantenimiento` int(11) DEFAULT NULL,
+		`anomalia` varchar(128) NOT NULL,
+		`descripcion` text DEFAULT NULL,
+		`fecha` date DEFAULT NULL,
+        `estatus` varchar(16) DEFAULT 'pendiente'
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
+
+    //Indica que es la PK de la tabla
     @Id
-    @Column(name = "id_anomalia")
+    //Para que sea autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //name sigue la nomenclatura de SQL
+    @Column(name = "id_anomalia")
     private Long idAnomalia;
 
     private Long idUnidad;
@@ -23,11 +48,13 @@ public class Anomalias {
     private String anomalia;
     private String descripcion;
     
-    @Temporal(TemporalType.DATE) //Agrega solo la fecha, sin la hora
-    @DateTimeFormat(pattern = "yyyy-MM-dd") //Formato de fecha
+    //Agrega solo la fecha, sin la hora
+    @Temporal(TemporalType.DATE)
+    //Formato de fecha
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
-    private String estatus = "pendiente";
+    private String estatus;
 
     public Anomalias(){
 
@@ -45,6 +72,7 @@ public class Anomalias {
         this.estatus = estatus;
     }
 
+    //Metodos Get y Set
     public Long getIdAnomalia() {
         return idAnomalia;
     }
@@ -109,6 +137,7 @@ public class Anomalias {
         this.estatus = estatus;
     }
 
+    //Metodo toString
     @Override
     public String toString() {
         return "Anomalias [idAnomalia=" + idAnomalia + ", idUnidad=" + idUnidad + ", idChofer=" + idChofer + ", idMantenimiento=" + idMantenimiento + ", anomalia=" + anomalia + ", descripcion=" + descripcion + ", fecha=" + fecha + ", estatus=" + estatus + "]";
