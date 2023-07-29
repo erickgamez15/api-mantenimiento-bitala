@@ -5,6 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import com.bitala.apiprueba.models.Chofer;
 
+/**
+ * API MANTENIMIENTOS - BITALA
+ * @AUTHOR ERICK GAMEZ
+ * REPOSITORY - CHOFER
+ * 
+ * version 1.0
+ */
+
 @Repository
 public interface IChoferRepository extends JpaRepository <Chofer, Long> {
     
