@@ -1,4 +1,4 @@
-package com.bitala.api.mantenimiento.entities;
+package com.bitala.api.mantenimiento.models;
 
 import jakarta.persistence.*;
 

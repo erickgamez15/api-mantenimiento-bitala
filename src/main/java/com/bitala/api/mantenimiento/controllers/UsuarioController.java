@@ -2,7 +2,7 @@ package com.bitala.api.mantenimiento.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.bitala.api.mantenimiento.entities.Usuario;
+import com.bitala.api.mantenimiento.models.Usuario;
 import com.bitala.api.mantenimiento.repository.IUsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
