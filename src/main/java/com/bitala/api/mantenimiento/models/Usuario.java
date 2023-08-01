@@ -21,9 +21,6 @@ public class Usuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "telefono")
-    private String telefono;
-
     @Column(name = "email")
     private String email;
 
@@ -40,10 +37,9 @@ public class Usuario {
 
     }
 
-    public Usuario(Long idUsuario, String nombre, String telefono, String email, String password, String estatus, String rol) {
+    public Usuario(Long idUsuario, String nombre, String email, String password, String estatus, String rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.telefono = telefono;
         this.email = email;
         this.password = password;
         this.estatus = estatus;
@@ -64,14 +60,6 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -108,6 +96,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + ", password=" + password + ", estatus=" + estatus + ", rol=" + rol + "]";
+        return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", email=" + email + ", password=" + password + ", estatus=" + estatus + ", rol=" + rol + "]";
     }
 }

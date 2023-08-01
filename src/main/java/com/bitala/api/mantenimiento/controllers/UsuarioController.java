@@ -46,7 +46,6 @@ public class UsuarioController {
 
         if(usuario != null){
             usuario.setNombre(usuarioData.getNombre());
-            usuario.setTelefono(usuarioData.getTelefono());
             usuario.setEmail(usuarioData.getEmail());
             usuario.setPassword(usuarioData.getPassword());
             usuario.setEstatus(usuarioData.getEstatus());
