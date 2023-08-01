@@ -1,4 +1,4 @@
-package com.bitala.api.mantenimiento.jwt;
+package com.bitala.api.mantenimiento.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
