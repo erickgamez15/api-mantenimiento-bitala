@@ -18,19 +18,19 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "estatus")
+    @Column(name = "estatus", nullable = false, length = 20)
     private String estatus;
 
-    @Column(name = "rol")
+    @Column(name = "rol", nullable = false, length = 50)
     private String rol;
 
     public Usuario() {
@@ -66,8 +66,8 @@ public class Usuario {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String usuario) {
+        this.email = usuario;
     }
 
     public String getPassword() {

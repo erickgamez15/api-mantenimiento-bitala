@@ -7,5 +7,5 @@ import com.bitala.api.mantenimiento.models.Usuario;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
-
+    Usuario findByEmail(String email);
 }

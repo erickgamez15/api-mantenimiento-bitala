@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.bitala.api.mantenimiento.models.Usuario;
 import com.bitala.api.mantenimiento.repository.IUsuarioRepository;
+import com.bitala.api.mantenimiento.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -19,9 +21,15 @@ public class UsuarioController {
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    Usuario usuario;
+
     //Constructor para inyección de dependencias
-    public UsuarioController(IUsuarioRepository usuarioRepository) {
+    public UsuarioController(IUsuarioRepository usuarioRepository, UsuarioService usuarioService) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping
@@ -35,6 +43,14 @@ public class UsuarioController {
         else return null;
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email){
+        usuario = usuarioService.findByEmail(email);
+        
+        if (usuario != null) return ResponseEntity.ok(usuario);
+        else return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     public Usuario createUsuario(@RequestBody Usuario usuario){
         return usuarioRepository.save(usuario);
@@ -42,7 +58,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuarioData){
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+       usuario = usuarioRepository.findById(id).orElse(null);
 
         if(usuario != null){
             usuario.setNombre(usuarioData.getNombre());
