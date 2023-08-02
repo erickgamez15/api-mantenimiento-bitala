@@ -54,9 +54,9 @@ public class ChoferController {
     //Modifica un Chofer por id
     @PutMapping("/{id}")
     public Chofer updateChofer(@PathVariable Long id, @RequestBody Chofer choferData){
-        Chofer chofer = new Chofer();
+        Chofer chofer = choferRepository.findById(id).orElse(null);
 
-        if (choferRepository.existsById(id)) {
+        if (chofer != null) {
             chofer.setNombre(choferData.getNombre());
             chofer.setApellidos(choferData.getApellidos());
             chofer.setCorreo(choferData.getCorreo());

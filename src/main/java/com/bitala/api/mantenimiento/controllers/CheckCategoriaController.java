@@ -54,9 +54,9 @@ public class CheckCategoriaController {
     //Modifica un CheckCategoria por id
     @PutMapping("/{id}")
     public CheckCategoria updateCategoria(@PathVariable Long id, @RequestBody CheckCategoria categoriaData) {
-        CheckCategoria checkCategoria = new CheckCategoria();
+        CheckCategoria checkCategoria = checkCategoriaRepository.findById(id).orElse(null);
 
-        if(checkCategoriaRepository.existsById(id)){
+        if(checkCategoria != null){
             checkCategoria.setNombre(categoriaData.getNombre());
             return checkCategoriaRepository.save(checkCategoria);
         } else return null;

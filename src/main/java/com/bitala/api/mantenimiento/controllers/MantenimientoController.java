@@ -54,9 +54,9 @@ public class MantenimientoController {
     //Modifica un Mantenimiento por id
     @PutMapping("/{id}")
     public Mantenimiento updateMantenimiento(@PathVariable Long id, @RequestBody Mantenimiento manteData){
-        Mantenimiento mantenimiento = new Mantenimiento();
+        Mantenimiento mantenimiento = mantenimientoRepository.findById(id).orElse(null);
 
-        if (mantenimientoRepository.existsById(id)) {
+        if (mantenimiento != null) {
             mantenimiento.setIdUnidad(manteData.getIdUnidad());
             mantenimiento.setFechaSolicitada(manteData.getFechaSolicitada());
             mantenimiento.setFechaEntrega(manteData.getFechaEntrega());

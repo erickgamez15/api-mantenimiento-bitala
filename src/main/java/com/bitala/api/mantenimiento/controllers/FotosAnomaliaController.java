@@ -54,7 +54,7 @@ public class FotosAnomaliaController {
     //Modifica una FotoAnomalia por id
     @PutMapping("/{id}")
     public FotosAnomalia updateFotos(@PathVariable Long id, @RequestBody FotosAnomalia fotosData){
-        FotosAnomalia fotoAnomalia = new FotosAnomalia();
+        FotosAnomalia fotoAnomalia = fotosAnomaliaRepository.findById(id).orElse(fotosData);
 
         if (fotosAnomaliaRepository.existsById(id)) {
             fotoAnomalia.setIdAnomalia(fotosData.getIdAnomalia());

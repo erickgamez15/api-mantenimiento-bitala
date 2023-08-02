@@ -5,15 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import com.bitala.api.mantenimiento.models.Empresa;
 import com.bitala.api.mantenimiento.repository.IEmpresaRepository;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * API MANTENIMIENTOS - BITALA
@@ -31,9 +25,7 @@ public class EmpresaController {
 
     //Anotación para inyección de dependencias
     @Autowired
-    private IEmpresaRepository empresaRepository; 
-
-    Optional<Empresa> empresaOptional;
+    private IEmpresaRepository empresaRepository;
 
     //Constructor para inyeccion de dependencias
     public EmpresaController(IEmpresaRepository empresaRepository) {
@@ -48,56 +40,26 @@ public class EmpresaController {
 
     //Busca una Empresa por id
     @GetMapping("/{id}")
-    public ResponseEntity<Empresa> findById(@PathVariable("id") Long id) {
-        empresaOptional = empresaRepository.findById(id);
-        return empresaOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public Empresa findById(@PathVariable("id") Long id) {
+        if (empresaRepository.existsById(id)) return empresaRepository.findById(id).orElse(null);
+        else return null;
     }
 
     //Agrega una nueva Empresa
     @PostMapping
-    public ResponseEntity<Empresa> createEmpresa(@RequestBody Empresa empresa){
-        try {
-            Empresa nuevEmpresa = empresaRepository.save(empresa);
-            return ResponseEntity.created(URI.create("/api/aunidad/" + nuevEmpresa.getIdEmpresa())).body(nuevEmpresa);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public Empresa createEmpresa(@RequestBody Empresa empresa){
+        return empresaRepository.save(empresa);
     }
     
     //Modifica una Empresa por id
     @PutMapping("/{id}")
-    public ResponseEntity<Empresa> updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaData) {
-        try {
-            empresaOptional = empresaRepository.findById(id);
-            if(empresaOptional.isPresent()){
-                Empresa empresaExistente = empresaOptional.get();
-                BeanUtils.copyProperties(empresaData, empresaExistente, "idEmpresa");
-                Empresa empresaActualizada = empresaRepository.save(empresaExistente);
-                return ResponseEntity.ok(empresaActualizada);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public Empresa updateEmpresa(@PathVariable Long id, @RequestBody Empresa empresaData) {
+        return null;
     }
 
     //Elimina una Empresa por id
     @DeleteMapping("/{id}")
-	public ResponseEntity<Empresa> deleteEmpresa(@PathVariable("id") Long id) {
-        try {
-            if(empresaRepository.existsById(id)) {
-                empresaRepository.deleteById(id);
-                return ResponseEntity.noContent().build();
-            } else return ResponseEntity.notFound().build();
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+	public void deleteEmpresa(@PathVariable("id") Long id) {
+        if(empresaRepository.existsById(id)) empresaRepository.deleteById(id);
 	}
-
-    // Manejo de excepciones genéricas para cualquier otra excepción no capturada
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGenericException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-    }
 }

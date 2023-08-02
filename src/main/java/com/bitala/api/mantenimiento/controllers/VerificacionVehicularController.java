@@ -54,9 +54,9 @@ public class VerificacionVehicularController {
     //Modifica una VerificacionVehicular por id
     @PutMapping("/{id}")
     public VerificacionVehicular updateVerificacion(@PathVariable Long id, @RequestBody VerificacionVehicular vehicularData){
-        VerificacionVehicular verificacionVehicular = new VerificacionVehicular();
+        VerificacionVehicular verificacionVehicular = verVehicularRepository.findById(id).orElse(null);
 
-        if (verVehicularRepository.existsById(id)) {
+        if (verificacionVehicular != null) {
             verificacionVehicular.setDigitos(vehicularData.getDigitos());
             verificacionVehicular.setpSemestre(vehicularData.getpSemestre());
             verificacionVehicular.setsSemestre(vehicularData.getsSemestre());

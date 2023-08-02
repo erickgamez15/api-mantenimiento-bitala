@@ -54,9 +54,9 @@ public class ChecksController {
     //Modifica un Check por id
     @PutMapping("/{id}")
     public Checks updateChecks(@PathVariable Long id, @RequestBody Checks checkData){
-        Checks check = new Checks();
+        Checks check = checkRepository.findById(id).orElse(null);
 
-        if (checkRepository.existsById(id)) {
+        if (check != null) {
             check.setCategoria(checkData.getCategoria());
             check.setDescripcion(checkData.getDescripcion());
             return checkRepository.save(check);

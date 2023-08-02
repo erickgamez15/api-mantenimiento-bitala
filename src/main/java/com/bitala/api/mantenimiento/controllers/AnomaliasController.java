@@ -54,9 +54,9 @@ public class AnomaliasController {
     //Modifica una Anomalia por id
     @PutMapping("/{id}")
     public Anomalias updateAnomalia(@PathVariable Long id, @RequestBody Anomalias anomaliaData){
-        Anomalias anomalia = new Anomalias();
+        Anomalias anomalia = anomaliasRepository.findById(id).orElse(anomaliaData);
 
-        if (anomaliasRepository.existsById(id)) {
+        if (anomalia != null) {
             anomalia.setIdUnidad(anomaliaData.getIdUnidad());
             anomalia.setIdChofer(anomaliaData.getIdChofer());
             anomalia.setIdMantenimiento(anomaliaData.getIdMantenimiento());

@@ -54,9 +54,9 @@ public class TiposVehiculosController {
     //Modifica un TipoVehiculo por id
     @PutMapping("/{id}")
     public TiposVehiculos updtateTipos(@PathVariable Long id, @RequestBody TiposVehiculos tipoData){
-        TiposVehiculos tiposVehiculos = new TiposVehiculos();
+        TiposVehiculos tiposVehiculos = tiposVehiculosRepository.findById(id).orElse(null);
         
-        if (tiposVehiculosRepository.existsById(id)) {
+        if (tiposVehiculos != null) {
             tiposVehiculos.setIdVehiculo(tipoData.getIdVehiculo());
             tiposVehiculos.setTipo_vehiculo(tipoData.getTipo_vehiculo());
             return tiposVehiculosRepository.save(tiposVehiculos);

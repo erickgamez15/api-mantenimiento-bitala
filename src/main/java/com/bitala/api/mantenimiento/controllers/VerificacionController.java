@@ -54,9 +54,9 @@ public class VerificacionController {
     //Modifica una Verificacion por id
     @PutMapping("/{id}")
     public Verificacion updateVerificacion(@PathVariable Long id, @RequestBody Verificacion verificacionData){
-        Verificacion verificacion = new Verificacion();
+        Verificacion verificacion = verificacionRepository.findById(id).orElse(null);
 
-        if (verificacionRepository.existsById(id)) {
+        if (verificacion != null) {
             verificacion.setIdMantenimiento(verificacionData.getIdMantenimiento());
             verificacion.setFechaInicial(verificacionData.getFechaInicial());
             verificacion.setFechaCheckeado(verificacionData.getFechaCheckeado());

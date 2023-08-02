@@ -54,9 +54,9 @@ public class ChecksMantenimientoController {
     //Modifica un ChecMantenimiento por id
     @PutMapping("/{id}")
     public ChecksMantenimiento updateChecksMantenimiento(@PathVariable Long id, @RequestBody ChecksMantenimiento checkManData){
-        ChecksMantenimiento checksMantenimiento = new ChecksMantenimiento();
+        ChecksMantenimiento checksMantenimiento = checksMantenimientoRepository.findById(id).orElse(null);
 
-        if(checksMantenimientoRepository.existsById(id)) {
+        if(checksMantenimiento != null) {
             checksMantenimiento.setIdVerificacion(checkManData.getIdVerificacion());
             checksMantenimiento.setIdCheck(checkManData.getIdCheck());
             checksMantenimiento.setChecked(checkManData.getChecked());

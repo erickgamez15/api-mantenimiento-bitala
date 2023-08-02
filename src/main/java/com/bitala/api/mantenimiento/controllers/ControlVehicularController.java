@@ -54,9 +54,9 @@ public class ControlVehicularController {
     //Modifica un ControlVehicular por id
     @PutMapping("/{id}")
     public ControlVehicular updateControlVehicular(@PathVariable Long id, @RequestBody ControlVehicular cVehicularData){
-        ControlVehicular controlVehicular = new ControlVehicular();
+        ControlVehicular controlVehicular = controlRepository.findById(id).orElse(null);
 
-        if (controlRepository.existsById(id)) {
+        if (controlVehicular != null) {
             controlVehicular.setFechaPSemestre(cVehicularData.getFechaPSemestre());
             controlVehicular.setDocPSemestre(cVehicularData.getDocPSemestre());
             controlVehicular.setCheckedPagoPs(cVehicularData.getCheckedPagoPs());
